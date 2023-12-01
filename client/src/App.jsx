@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Home, CreatePost } from "./pages";
 
 // UI COMPONENTS
-import { Header } from "./ui";
+import { Header } from "./components";
 
 function App() {
   const router = createBrowserRouter([
