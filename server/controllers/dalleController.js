@@ -32,7 +32,7 @@ const createDalle = async (req, res) => {
 
     const image = result.data[0].b64_json;
 
-    return res.status(201).send({ photo: image });
+    return res.status(200).send({ photo: image });
   } catch (err) {
     console.error(err.message);
     return res.status(500).send({ message: err.message });

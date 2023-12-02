@@ -44,6 +44,7 @@ function CreatePost() {
       alert("Please enter a prompt");
     }
   };
+
   const handleSubmit = async e => {
     e.preventDefault();
 
@@ -51,29 +52,32 @@ function CreatePost() {
       setIsLoading(true);
 
       try {
-        const res = await fetch("http://localhost:8080/api/v1/dalle", {
+        const response = await fetch("http://localhost:8080/api/v1/post", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(form),
+          body: JSON.stringify({ ...form }),
         });
 
-        await res.json();
+        await response.json();
+        alert("Success");
         navigate("/");
       } catch (err) {
-        console.error(err);
-        alert(err.message);
+        console.error(err.message);
+        alert(err);
       } finally {
         setIsLoading(false);
       }
     } else {
-      alert("Please enter a prompt and generate an image");
+      alert("Please generate an image with proper details");
     }
   };
+
   const handleChange = e => {
     setForm(prevForm => ({ ...prevForm, [e.target.name]: e.target.value }));
   };
+
   const handleSurpriseMe = () => {
     const randomPrompt = getRandomPrompt(form.prompt);
     setForm(prevForm => ({ ...prevForm, prompt: randomPrompt }));

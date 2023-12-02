@@ -30,7 +30,11 @@ const createPost = async (req, res) => {
 
     const photoUrl = await cloudinary.uploader.upload(photo);
 
-    const newPost = await Post.create({ name, prompt, photo: photoUrl.url });
+    const newPost = await postModel.create({
+      name,
+      prompt,
+      photo: photoUrl.url,
+    });
 
     return res.status(201).send({ success: true, data: newPost });
   } catch (err) {
