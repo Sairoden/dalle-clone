@@ -23,12 +23,15 @@ function Home() {
     const loadData = async () => {
       setLoading(true);
       try {
-        const res = await fetch("http://localhost:8080/api/v1/post", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const res = await fetch(
+          "https://sairoden-dalle-clone-backend.onrender.com/api/v1/post",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (res.ok) {
           const { data } = await res.json();
