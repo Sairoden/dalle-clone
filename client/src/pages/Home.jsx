@@ -17,6 +17,27 @@ function Home() {
   const [allPosts, setAllPosts] = useState(null);
   const [searchText, setSearchText] = useState("");
 
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch("http://localhost:8080/api/v1/dalle");
+
+        if (res.ok) {
+          const { data } = await res.json();
+          setAllPosts(data?.reverse());
+        }
+      } catch (err) {
+        console.error(err);
+        alert(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, []);
+
   return (
     <section className="max-w-7xl mx-auto">
       <div>
@@ -51,7 +72,7 @@ function Home() {
               {searchText ? (
                 <RenderCards data={[]} title="No search results found" />
               ) : (
-                <RenderCards data={[]} title="No posts found" />
+                <RenderCards data={allPosts} title="No posts found" />
               )}
             </div>
           </>
